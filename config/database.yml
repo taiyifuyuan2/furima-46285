@@ -15,19 +15,19 @@ default: &default
 
 development:
   <<: *default
-  adapter: mysql2
-  username: root
+  adapter: postgresql
+  username: fukumototaichi
   password:
   host: localhost
-  database: furima_46385_development
+  database: furima_46285_development
 
 test:
   <<: *default
-  adapter: mysql2
-  username: root
+  adapter: postgresql
+  username: fukumototaichi
   password:
   host: localhost
-  database: furima_46385_test
+  database: furima_46285_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
