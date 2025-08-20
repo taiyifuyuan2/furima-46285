@@ -24,6 +24,9 @@ module Furima46385
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     
+    # デフォルトロケールを英語に設定
+    config.i18n.default_locale = :en
+    
     # Basic認証の環境変数設定
     config.basic_auth_user = ENV['BASIC_AUTH_USER'] || 'admin'
     config.basic_auth_password = ENV['BASIC_AUTH_PASSWORD'] || '2222'

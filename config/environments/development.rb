@@ -77,4 +77,6 @@ Rails.application.configure do
   # Basic認証の環境変数設定（開発環境）
   ENV['BASIC_AUTH_USER'] = 'admin'
   ENV['BASIC_AUTH_PASSWORD'] = '2222'
+  
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
