@@ -26,6 +26,8 @@ class User < ApplicationRecord
   validates :password, presence: true
   validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)/, message: 'Include both letters and numbers' },
                        if: :password_required?
+  validates :password, format: { with: /\A[!-~]+\z/, message: 'Cannot contain full-width characters' },
+                       if: :password_required?
 
   private
 
