@@ -1,24 +1,76 @@
-# README
+# FURIMA
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
+FURIMAは、フリーマーケットサイトのアプリケーションです。
 
-Things you may want to cover:
+## 開発環境
+- Ruby 3.2.0
+- Rails 7.1.5.2
+- PostgreSQL
 
-* Ruby version
+## データベース設計
 
-* System dependencies
+### テーブル設計
 
-* Configuration
+#### users テーブル
+| Column | Type | Options |
+|--------|------|---------|
+| id | integer | null: false, primary_key: true |
+| nickname | string | null: false |
+| email | string | null: false, unique: true |
+| encrypted_password | string | null: false |
+| last_name | string | null: false |
+| first_name | string | null: false |
+| last_name_kana | string | null: false |
+| first_name_kana | string | null: false |
+| birth_date | date | null: false |
 
-* Database creation
+#### items テーブル
+| Column | Type | Options |
+|--------|------|---------|
+| id | integer | null: false, primary_key: true |
+| name | string | null: false |
+| description | text | null: false |
+| category_id | integer | null: false |
+| condition_id | integer | null: false |
+| shipping_fee_id | integer | null: false |
+| prefecture_id | integer | null: false |
+| shipping_days_id | integer | null: false |
+| price | integer | null: false |
+| user_id | references | null: false, foreign_key: true |
 
-* Database initialization
+#### orders テーブル
+| Column | Type | Options |
+|--------|------|---------|
+| id | integer | null: false, primary_key: true |
+| user_id | references | null: false, foreign_key: true |
+| item_id | references | null: false, foreign_key: true |
 
-* How to run the test suite
+#### addresses テーブル
+| Column | Type | Options |
+|--------|------|---------|
+| id | integer | null: false, primary_key: true |
+| postal_code | string | null: false |
+| prefecture_id | integer | null: false |
+| city | string | null: false |
+| street_address | string | null: false |
+| building_name | string | |
+| phone_number | string | null: false |
+| order_id | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+### アソシエーション
+- User has_many :items
+- User has_many :orders
+- Item belongs_to :user
+- Item has_one :order
+- Order belongs_to :user
+- Order belongs_to :item
+- Order has_one :address
+- Address belongs_to :order
 
-* Deployment instructions
+### 注意事項
+- カテゴリー、商品の状態、配送料の負担、発送元の地域、発送までの日数はActiveHashを使用
+- 価格は300円〜9,999,999円の範囲で設定
+- 郵便番号は「3桁ハイフン4桁」の形式
+- 電話番号は10桁以上11桁以内の半角数値
 
-* ...
