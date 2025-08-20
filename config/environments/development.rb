@@ -73,4 +73,8 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+  
+  # Basic認証の環境変数設定（開発環境）
+  ENV['BASIC_AUTH_USER'] = 'admin'
+  ENV['BASIC_AUTH_PASSWORD'] = '2222'
 end
