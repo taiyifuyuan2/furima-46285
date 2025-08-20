@@ -15,7 +15,6 @@ FURIMAは、フリーマーケットサイトのアプリケーションです�
 #### users テーブル
 | Column | Type | Options |
 |--------|------|---------|
-| id | integer | null: false, primary_key: true |
 | nickname | string | null: false |
 | email | string | null: false, unique: true |
 | encrypted_password | string | null: false |
@@ -28,7 +27,6 @@ FURIMAは、フリーマーケットサイトのアプリケーションです�
 #### items テーブル
 | Column | Type | Options |
 |--------|------|---------|
-| id | integer | null: false, primary_key: true |
 | name | string | null: false |
 | description | text | null: false |
 | category_id | integer | null: false |
@@ -42,14 +40,12 @@ FURIMAは、フリーマーケットサイトのアプリケーションです�
 #### orders テーブル
 | Column | Type | Options |
 |--------|------|---------|
-| id | integer | null: false, primary_key: true |
 | user | references | null: false, foreign_key: true |
 | item | references | null: false, foreign_key: true |
 
 #### addresses テーブル
 | Column | Type | Options |
 |--------|------|---------|
-| id | integer | null: false, primary_key: true |
 | postal_code | string | null: false |
 | prefecture_id | integer | null: false |
 | city | string | null: false |
