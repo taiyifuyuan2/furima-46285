@@ -37,14 +37,14 @@ FURIMAは、フリーマーケットサイトのアプリケーションです�
 | prefecture_id | integer | null: false |
 | shipping_days_id | integer | null: false |
 | price | integer | null: false |
-| user_id | references | null: false, foreign_key: true |
+| user | references | null: false, foreign_key: true |
 
 #### orders テーブル
 | Column | Type | Options |
 |--------|------|---------|
 | id | integer | null: false, primary_key: true |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| user | references | null: false, foreign_key: true |
+| item | references | null: false, foreign_key: true |
 
 #### addresses テーブル
 | Column | Type | Options |
@@ -56,7 +56,7 @@ FURIMAは、フリーマーケットサイトのアプリケーションです�
 | street_address | string | null: false |
 | building_name | string | |
 | phone_number | string | null: false |
-| order_id | references | null: false, foreign_key: true |
+| order | references | null: false, foreign_key: true |
 
 ### アソシエーション
 - User has_many :items
@@ -67,10 +67,4 @@ FURIMAは、フリーマーケットサイトのアプリケーションです�
 - Order belongs_to :item
 - Order has_one :address
 - Address belongs_to :order
-
-### 注意事項
-- カテゴリー、商品の状態、配送料の負担、発送元の地域、発送までの日数はActiveHashを使用
-- 価格は300円〜9,999,999円の範囲で設定
-- 郵便番号は「3桁ハイフン4桁」の形式
-- 電話番号は10桁以上11桁以内の半角数値
 
