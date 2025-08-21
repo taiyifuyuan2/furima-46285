@@ -7,6 +7,11 @@ class ItemsController < ApplicationController
     @items = Item.order(created_at: :desc)
   end
 
+  def show
+    @item = Item.find(params[:id])
+    Rails.logger.info "商品詳細ページにアクセス: Item ID: #{@item.id}, 名前: #{@item.name}"
+  end
+
   def new
     @item = Item.new
   end
