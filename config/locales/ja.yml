@@ -1,0 +1,10 @@
+ja:
+  items:
+    create:
+      success: "商品を出品しました"
+    update:
+      success: "商品情報を更新しました"
+    destroy:
+      success: "商品を削除しました"
+    edit:
+      no_permission: "商品の編集権限がありません"
