@@ -24,19 +24,15 @@
       </span>
     </div>
 
-    <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合とそうでない場合で、処理を分けましょう %>
     <% if user_signed_in? %>
       <% if current_user.id == @item.user_id %>
-        <%# 商品が売れていない場合は、編集・削除ボタンを表示 %>
         <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
       <% else %>
-        <%# 商品が売れていない場合は、購入画面に進むボタンを表示 %>
         <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
       <% end %>
     <% end %>
-    <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合とそうでない場合で、処理を分けましょう %>
 
     <div class="item-explain-box">
       <span><%= @item.description %></span>
