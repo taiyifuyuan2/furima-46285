@@ -22,6 +22,8 @@ class User < ApplicationRecord
                               if: :first_name_kana_present?
   validates :birth_date, presence: true
 
+  has_many :items, dependent: :destroy
+
   # パスワードのバリデーション
   validates :password, presence: true
   validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)/, message: 'Include both letters and numbers' },

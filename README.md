@@ -30,8 +30,8 @@ FURIMAは、フリーマーケットサイトのアプリケーションです�
 | name | string | null: false |
 | description | text | null: false |
 | category_id | integer | null: false |
-| condition_id | integer | null: false |
-| shipping_fee_id | integer | null: false |
+| item_condition_id | integer | null: false |
+| shipping_fee_burden_id | integer | null: false |
 | prefecture_id | integer | null: false |
 | shipping_day_id | integer | null: false |
 | price | integer | null: false |
