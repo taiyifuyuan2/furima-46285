@@ -4,7 +4,10 @@ export default class extends Controller {
   static targets = ["price", "addTaxPrice", "profit"]
 
   connect() {
-    this.calculatePrice()
+    // ページ読み込み時に価格フィールドの値を確認し、値がある場合は計算を実行
+    if (this.priceTarget.value) {
+      this.calculatePrice()
+    }
   }
 
   calculatePrice() {

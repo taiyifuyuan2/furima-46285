@@ -14,7 +14,7 @@ FactoryBot.define do
     shipping_day_id { 2 }  # 1~2日で発送
 
     after(:build) do |item|
-      item.image.attach(io: File.open(Rails.root.join('test', 'fixtures', 'files', 'test_image.png')),
+      item.image.attach(io: Rails.root.join('test/fixtures/files/test_image.png').open,
                         filename: 'test_image.png')
     end
   end

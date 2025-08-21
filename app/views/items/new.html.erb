@@ -3,7 +3,7 @@
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
 
   </header>
-  <div class="items-sell-main" data-controller="price-calculator">
+  <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item, local: true do |f| %>
 
@@ -97,18 +97,18 @@
             <span class="indispensable">必須</span>
           </div>
           <span class="sell-yen">¥</span>
-          <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300", data: { price_calculator_target: "price", action: "input->price-calculator#calculatePrice" } %>
+          <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
         </div>
         <div class="price-content">
           <span>販売手数料 (10%)</span>
           <span>
-            <span data-price-calculator-target="addTaxPrice"></span>円
+            <span id="add-tax-price"></span>円
           </span>
         </div>
         <div class="price-content">
           <span>販売利益</span>
           <span>
-            <span data-price-calculator-target="profit"></span>円
+            <span id="profit"></span>円
           </span>
         </div>
       </div>
