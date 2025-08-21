@@ -62,7 +62,6 @@
   </div>
   <%# /FURIMAが選ばれる3つの理由部分 %>
 
-  <%# 画面中央の「会員数日本一位」帯部分 %>
   <div class='ad-contents'>
     <h2 class='ad-title'>
       会員数日本一位
@@ -81,9 +80,7 @@
       <%= link_to image_tag("google-play.png", class:"google-btn"), "#" %>
     </div>
   </div>
-  <%# /画面中央の「会員数日本一位」帯部分 %>
 
-  <%# FURIMAの特徴 %>
   <div class='feature-contents'>
     <h2 class='title'>
       FURIMAの特徴
@@ -118,9 +115,7 @@
       </li>
     </ul>
   </div>
-  <%# /FURIMAの特徴 %>
 
-  <%# 商品一覧 %>
   <div class='item-contents'>
     <h2 class='title'>ピックアップカテゴリー</h2>
     <div class="subtitle" >
@@ -134,13 +129,6 @@
             <%= link_to item_path(item) do %>
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" %>
-
-              <%# 商品が売れていればsold outを表示しましょう %>
-              <%# <div class='sold-out'>
-                <span>Sold Out!!</span>
-              </div> %>
-              <%# //商品が売れていればsold outを表示しましょう %>
-
             </div>
             <div class='item-info'>
               <h3 class='item-name'>
@@ -158,7 +146,6 @@
           </li>
         <% end %>
       <% else %>
-        <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
         <li class='list'>
           <%= link_to '#' do %>
           <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -179,7 +166,6 @@
       <% end %>
     </ul>
   </div>
-  <%# /商品一覧 %>
 </div>
 <%= link_to(new_item_path, class: 'purchase-btn') do %>
   <span class='purchase-btn-text'>出品する</span>

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update]
-  before_action :set_item, only: %i[show edit update]
-  before_action :ensure_owner, only: %i[edit update]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :set_item, only: %i[show edit update destroy]
+  before_action :ensure_owner, only: %i[edit update destroy]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
     @item = current_user.items.build(item_params)
 
     if @item.save
-      redirect_to root_path, notice: '商品を出品しました'
+      redirect_to root_path, notice: t('items.create.success')
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,10 +31,15 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to item_path(@item), notice: '商品情報を更新しました'
+      redirect_to item_path(@item), notice: t('items.update.success')
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to root_path, notice: t('items.destroy.success')
   end
 
   private
@@ -51,6 +56,6 @@ class ItemsController < ApplicationController
   def ensure_owner
     return if @item.user_id == current_user.id
 
-    redirect_to root_path, alert: '商品の編集権限がありません'
+    redirect_to root_path, alert: t('items.edit.no_permission')
   end
 end
