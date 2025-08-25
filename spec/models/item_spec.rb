@@ -18,19 +18,19 @@ RSpec.describe Item, type: :model do
       it '商品名が空では保存できない' do
         @item.name = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Name を入力してください")
+        expect(@item.errors.full_messages).to include('Name を入力してください')
       end
 
       it '商品説明が空では保存できない' do
         @item.description = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Description を入力してください")
+        expect(@item.errors.full_messages).to include('Description を入力してください')
       end
 
       it '価格が空では保存できない' do
         @item.price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price を入力してください")
+        expect(@item.errors.full_messages).to include('Price を入力してください')
       end
     end
 
@@ -116,7 +116,7 @@ RSpec.describe Item, type: :model do
       it '画像が空では保存できない' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image を入力してください")
+        expect(@item.errors.full_messages).to include('Image を入力してください')
       end
     end
   end

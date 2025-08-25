@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :item do
-    name { 'テスト商品' }
-    description { 'テスト商品の説明です。' }
-    price { 1000 }
+    name { Faker::Commerce.product_name }
+    description { Faker::Lorem.sentence }
+    price { Faker::Number.between(from: 300, to: 9_999_999) }
 
     association :user
     category_id { 2 } # レディース
