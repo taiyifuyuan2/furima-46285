@@ -121,3 +121,81 @@
 </div>
 
 <%= render "shared/second-footer" %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOMContentLoaded event fired for orders page');
+  
+  // PAY.JPライブラリが読み込まれているかチェック
+  if (typeof Payjp === 'undefined') {
+    console.log('Payjp is not defined');
+    return;
+  }
+  
+  // PAY.JPの公開鍵が設定されているかチェック
+  if (!window.PAYJP_PUBLIC_KEY) {
+    console.log('PAYJP_PUBLIC_KEY is not set');
+    return;
+  }
+
+  console.log('PAYJP_PUBLIC_KEY:', window.PAYJP_PUBLIC_KEY);
+
+  try {
+    // PAY.JPの正しい使用方法：Payjpコンストラクタを使用
+    const payjp = Payjp(window.PAYJP_PUBLIC_KEY);
+    console.log('Payjp instance created');
+    
+    const elements = payjp.elements();
+    
+    const numberElement = elements.create('cardNumber');
+    const expiryElement = elements.create('cardExpiry');
+    const cvcElement = elements.create('cardCvc');
+
+    // フォーム要素が存在するかチェック
+    const numberForm = document.getElementById("number-form");
+    const expiryForm = document.getElementById("expiry-form");
+    const cvcForm = document.getElementById("cvc-form");
+
+    console.log('Form elements found:', { numberForm, expiryForm, cvcForm });
+
+    if (numberForm && expiryForm && cvcForm) {
+      numberElement.mount('#number-form');
+      expiryElement.mount('#expiry-form');
+      cvcElement.mount('#cvc-form');
+      console.log('Card elements mounted successfully');
+    } else {
+      console.log('Required form elements not found');
+      return;
+    }
+
+    const form = document.getElementById("charge-form");
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log('Form submission intercepted');
+
+        payjp.createToken(numberElement).then(function (response) {
+          if (response.error) {
+            console.log('Token creation error:', response.error);
+          } else {
+            console.log('Token created successfully:', response.id);
+            const token = response.id;
+            const renderDom = document.getElementById("charge-form");
+            const tokenObj = `<input value=${token} name='purchase_form[token]' type="hidden"> `;
+            renderDom.insertAdjacentHTML("beforeend", tokenObj);
+            
+            numberElement.clear();
+            expiryElement.clear();
+            cvcElement.clear();
+            
+            document.getElementById("charge-form").submit();
+          }
+        });
+      });
+      console.log('Form submit event listener added');
+    }
+  } catch (error) {
+    console.log('Error in pay function:', error);
+  }
+});
+</script>

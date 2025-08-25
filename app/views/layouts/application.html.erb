@@ -12,6 +12,10 @@
   <script>
     window.PAYJP_PUBLIC_KEY = '<%= ENV['PAYJP_PUBLIC_KEY'] %>';
   </script>
+  <!-- Turboを無効化 -->
+  <script>
+    window.Turbo = undefined;
+  </script>
 </head>
 
 <body>

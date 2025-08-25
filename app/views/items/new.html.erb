@@ -155,3 +155,57 @@
     </p>
   </footer>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOMContentLoaded event fired');
+  
+  const priceInput = document.getElementById("item-price");
+  const addTaxDom = document.getElementById("add-tax-price");
+  const profitDom = document.getElementById("profit");
+  
+  console.log('Elements found:', { priceInput, addTaxDom, profitDom });
+  
+  if (!priceInput || !addTaxDom || !profitDom) {
+    console.log('Required elements not found');
+    return;
+  }
+  
+  function calculatePrice() {
+    console.log('calculatePrice called');
+    const inputValue = priceInput.value;
+    const price = parseInt(inputValue) || 0;
+    
+    console.log('Input value:', inputValue, 'Parsed price:', price);
+    
+    if (price >= 300 && price <= 9999999) {
+      const tax = Math.floor(price * 0.1); // 10%の手数料
+      const profit = price - tax;
+      
+      console.log('Calculated tax:', tax, 'profit:', profit);
+      
+      addTaxDom.innerHTML = tax.toLocaleString();
+      profitDom.innerHTML = profit.toLocaleString();
+    } else {
+      addTaxDom.innerHTML = "";
+      profitDom.innerHTML = "";
+    }
+  }
+  
+  // 入力があるたびにイベント発火
+  priceInput.addEventListener("input", calculatePrice);
+  console.log('Event listener added for input');
+  
+  // ページ読み込み時に既存の価格があれば計算を実行
+  if (priceInput.value) {
+    console.log('Initial value found, calculating...');
+    calculatePrice();
+  }
+  
+  // さらに確実にするため、少し遅延して実行
+  setTimeout(() => {
+    console.log('Delayed execution of price function');
+    calculatePrice();
+  }, 100);
+});
+</script>

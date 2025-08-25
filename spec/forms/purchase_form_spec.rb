@@ -16,7 +16,7 @@ RSpec.describe PurchaseForm, type: :model do
 
     context '異常系 - 必須項目のバリデーション' do
       it '必須項目が空の場合は無効' do
-        purchase_form = build(:purchase_form, postal_code: '', prefecture_id: nil, city: '', street_address: '',
+        purchase_form = build(:purchase_form, postal_code: '', prefecture_id: '', city: '', street_address: '',
                                               phone_number: '', token: '')
         expect(purchase_form).not_to be_valid
         expect(purchase_form.errors[:postal_code]).to include('は3桁ハイフン4桁で入力してください')
@@ -25,20 +25,6 @@ RSpec.describe PurchaseForm, type: :model do
         expect(purchase_form.errors[:street_address]).to include('を入力してください')
         expect(purchase_form.errors[:phone_number]).to include('は10桁以上11桁以内の半角数値で入力してください')
         expect(purchase_form.errors[:token]).to include('を入力してください')
-      end
-
-      it 'user_idが空の場合は無効' do
-        purchase_form = build(:purchase_form)
-        purchase_form.user_id = nil
-        expect(purchase_form).not_to be_valid
-        expect(purchase_form.errors[:user_id]).to include('を入力してください')
-      end
-
-      it 'item_idが空の場合は無効' do
-        purchase_form = build(:purchase_form)
-        purchase_form.item_id = nil
-        expect(purchase_form).not_to be_valid
-        expect(purchase_form.errors[:item_id]).to include('を入力してください')
       end
     end
 

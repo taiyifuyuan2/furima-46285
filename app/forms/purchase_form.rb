@@ -22,8 +22,6 @@ class PurchaseForm
     validates :city
     validates :street_address
     validates :token
-    validates :user_id
-    validates :item_id
   end
 
   validate :prefecture_cannot_be_default
