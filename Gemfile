@@ -48,6 +48,7 @@ gem 'bootsnap', require: false
 
 gem 'active_hash'
 gem 'devise'
+gem 'payjp'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -58,6 +59,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end
 
 group :development do

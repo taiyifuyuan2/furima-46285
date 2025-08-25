@@ -81,4 +81,7 @@ Rails.application.configure do
   ENV['BASIC_AUTH_PASSWORD'] = '2222'
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # 翻訳エラーを表示しない
+  config.i18n.raise_on_missing_translations = false
 end
