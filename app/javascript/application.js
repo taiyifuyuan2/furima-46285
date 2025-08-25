@@ -2,3 +2,4 @@
 import "controllers"
 import "item_price"
 import "card"
+import "rails-ujs"

@@ -75,6 +75,7 @@ ja:
       greater_than_or_equal_to: "は%{count}以上の値にしてください"
       less_than_or_equal_to: "は%{count}以下の値にしてください"
       required: "が必要です"
+      confirmation: "とパスワード（確認）が一致しません"
     attributes:
       postal_code:
         blank: "は3桁ハイフン4桁で入力してください"
