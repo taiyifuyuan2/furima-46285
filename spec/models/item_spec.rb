@@ -18,19 +18,19 @@ RSpec.describe Item, type: :model do
       it '商品名が空では保存できない' do
         @item.name = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Name can't be blank")
+        expect(@item.errors.full_messages).to include('Name を入力してください')
       end
 
       it '商品説明が空では保存できない' do
         @item.description = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Description can't be blank")
+        expect(@item.errors.full_messages).to include('Description を入力してください')
       end
 
       it '価格が空では保存できない' do
         @item.price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include('Price を入力してください')
       end
     end
 
@@ -38,37 +38,37 @@ RSpec.describe Item, type: :model do
       it '価格が300未満では保存できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
+        expect(@item.errors.full_messages).to include('Price は300以上の値にしてください')
       end
 
       it '価格が9999999を超えると保存できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+        expect(@item.errors.full_messages).to include('Price は9999999以下の値にしてください')
       end
 
       it '価格が整数でないと保存できない' do
         @item.price = 1000.5
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price must be an integer')
+        expect(@item.errors.full_messages).to include('Price は整数で入力してください')
       end
 
       it '価格が全角数字では保存できない' do
         @item.price = '１０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not a number')
+        expect(@item.errors.full_messages).to include('Price は数値で入力してください')
       end
 
       it '価格に文字列が含まれていると保存できない' do
         @item.price = '1000円'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not a number')
+        expect(@item.errors.full_messages).to include('Price は数値で入力してください')
       end
 
       it '価格が英数字混合では保存できない' do
         @item.price = '1000abc'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not a number')
+        expect(@item.errors.full_messages).to include('Price は数値で入力してください')
       end
     end
 
@@ -108,7 +108,7 @@ RSpec.describe Item, type: :model do
       it 'ユーザーが空では保存できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include('User is required')
+        expect(@item.errors.full_messages).to include('User が必要です')
       end
     end
 
@@ -116,7 +116,7 @@ RSpec.describe Item, type: :model do
       it '画像が空では保存できない' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include('Image を入力してください')
       end
     end
   end

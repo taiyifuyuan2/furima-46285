@@ -35,6 +35,15 @@ const price = () => {
   }
 };
 
-// turbo:loadとturbo:renderイベントを追加
-window.addEventListener("turbo:load", price);
-window.addEventListener("turbo:render", price);
+// ページ読み込み完了後に実行
+console.log('item_price.js loaded, document.readyState:', document.readyState);
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded event fired for item_price');
+    price();
+  });
+} else {
+  console.log('Document already loaded, calling price() immediately');
+  price();
+}
