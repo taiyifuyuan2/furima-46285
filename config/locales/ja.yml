@@ -1,4 +1,22 @@
 ja:
+  # 日付フォーマット設定を追加
+  date:
+    order:
+      - :year
+      - :month
+      - :day
+    formats:
+      default: "%Y年%m月%d日"
+      short: "%m/%d"
+      long: "%Y年%m月%d日 %H時%M分"
+  
+  time:
+    formats:
+      default: "%Y年%m月%d日 %H時%M分"
+      short: "%m/%d %H時%M分"
+      long: "%Y年%m月%d日 %H時%M分 %Z"
+  
+  # 既存の設定
   items:
     create:
       success: "商品を出品しました"
