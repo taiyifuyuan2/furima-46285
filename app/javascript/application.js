@@ -2,3 +2,7 @@
 import "controllers"
 import "item_price"
 import "card"
+
+// Turboを無効化してページ間移動の問題を解決
+import { Turbo } from "@hotwired/turbo-rails"
+Turbo.session.drive = false
