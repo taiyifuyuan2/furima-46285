@@ -51,7 +51,7 @@
             <label class="form-text">カード番号</label>
             <span class="indispensable">必須</span>
           </div>
-          <input type="text" class="input-default" placeholder="カード番号" disabled>
+          <div id="card-number" class="input-default"></div>
         </div>
         <div class="form-group">
           <div class='form-text-wrap'>
@@ -59,7 +59,7 @@
             <span class="indispensable">必須</span>
           </div>
           <div class='input-expiration-date-wrap'>
-            <input type="text" class="input-default" placeholder="月/年" disabled>
+            <div id="card-expiry" class="input-default"></div>
           </div>
         </div>
         <div class="form-group">
@@ -67,7 +67,7 @@
             <label class="form-text">セキュリティコード</label>
             <span class="indispensable">必須</span>
           </div>
-          <input type="text" class="input-default" placeholder="CVC" disabled>
+          <div id="card-cvc" class="input-default"></div>
         </div>
       </div>
       <%# /カード情報の入力 %>

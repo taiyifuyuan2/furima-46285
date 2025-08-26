@@ -20,14 +20,14 @@ const pay = () => {
     const cvcElement = elements.create('cardCvc');
 
     // フォーム要素が存在するかチェック
-    const numberForm = document.getElementById("number-form");
-    const expiryForm = document.getElementById("expiry-form");
-    const cvcForm = document.getElementById("cvc-form");
+    const numberForm = document.getElementById("card-number");
+    const expiryForm = document.getElementById("card-expiry");
+    const cvcForm = document.getElementById("card-cvc");
 
     if (numberForm && expiryForm && cvcForm) {
-      numberElement.mount('#number-form');
-      expiryElement.mount('#expiry-form');
-      cvcElement.mount('#cvc-form');
+      numberElement.mount('#card-number');
+      expiryElement.mount('#card-expiry');
+      cvcElement.mount('#card-cvc');
     } else {
       return;
     }
