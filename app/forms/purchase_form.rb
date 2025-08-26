@@ -14,17 +14,35 @@ class PurchaseForm
   attribute :user_id, :integer
   attribute :item_id, :integer
 
-  validates :postal_code, presence: true, format: { with: /\A\d{3}-\d{4}\z/, message: 'は3桁ハイフン4桁で入力してください' }
-  validates :prefecture_id, presence: true
-  validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: 'は10桁以上11桁以内の半角数値で入力してください' }
+  validates :token, presence: { message: "can't be blank" }
+  validates :postal_code, presence: { message: "can't be blank" },
+                          format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
+  validates :prefecture_id, presence: { message: "can't be blank" }
+  validates :city, presence: { message: "can't be blank" }
+  validates :street_address, presence: { message: "can't be blank" }
+  validates :phone_number, presence: { message: "can't be blank" }
 
-  with_options presence: true do
-    validates :city
-    validates :street_address
-    validates :token
+  validate :phone_number_format_and_length
+
+  # フィールド名を英語に設定
+  def self.human_attribute_name(attribute, options = {})
+    case attribute.to_s
+    when 'postal_code'
+      'Postal code'
+    when 'prefecture_id'
+      'Prefecture'
+    when 'city'
+      'City'
+    when 'street_address'
+      'Addresses'
+    when 'phone_number'
+      'Phone number'
+    when 'token'
+      'Token'
+    else
+      super
+    end
   end
-
-  validate :prefecture_cannot_be_default
 
   def initialize(attributes = {})
     super
@@ -57,6 +75,29 @@ class PurchaseForm
   def prefecture_cannot_be_default
     return unless prefecture_id == 1
 
-    errors.add(:prefecture, 'を選択してください')
+    errors.add(:prefecture, "can't be blank")
+  end
+
+  def phone_number_format_and_length
+    # 電話番号が空の場合も「is too short」と「is invalid」を表示
+    if phone_number.blank?
+      errors.add(:phone_number, 'is too short')
+      errors.add(:phone_number, 'is invalid. Input only number')
+      return
+    end
+
+    # 電話番号が数字のみで構成されているかチェック（空でない場合のみ）
+    unless phone_number.match?(/\A\d+\z/)
+      errors.add(:phone_number, 'is invalid. Input only number')
+      return
+    end
+
+    # 電話番号が10桁未満の場合
+    errors.add(:phone_number, 'is too short') if phone_number.length < 10
+
+    # 電話番号が11桁を超える場合
+    return unless phone_number.length > 11
+
+    errors.add(:phone_number, 'is too long')
   end
 end

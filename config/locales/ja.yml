@@ -33,17 +33,17 @@ ja:
         purchase_form:
           attributes:
             postal_code:
-              blank: "は3桁ハイフン4桁で入力してください"
+              blank: "can't be blank"
             prefecture_id:
-              blank: "を選択してください"
+              blank: "can't be blank"
             city:
-              blank: "を入力してください"
+              blank: "can't be blank"
             street_address:
-              blank: "を入力してください"
+              blank: "can't be blank"
             phone_number:
-              blank: "は10桁以上11桁以内の半角数値で入力してください"
+              blank: "can't be blank"
             token:
-              blank: "を入力してください"
+              blank: "can't be blank"
   
   activerecord:
     errors:
@@ -78,17 +78,17 @@ ja:
       confirmation: "とパスワード（確認）が一致しません"
     attributes:
       postal_code:
-        blank: "は3桁ハイフン4桁で入力してください"
+        blank: "can't be blank"
       prefecture_id:
-        blank: "を選択してください"
+        blank: "can't be blank"
       city:
-        blank: "を入力してください"
+        blank: "can't be blank"
       street_address:
-        blank: "を入力してください"
+        blank: "can't be blank"
       phone_number:
-        blank: "は10桁以上11桁以内の半角数値で入力してください"
+        blank: "can't be blank"
       token:
-        blank: "を入力してください"
+        blank: "can't be blank"
       name:
         blank: "を入力してください"
       description:

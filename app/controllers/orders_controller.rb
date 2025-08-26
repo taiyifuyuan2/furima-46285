@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
     if @purchase_form.save(current_user, @item)
       redirect_to root_path, notice: '商品を購入しました'
     else
+      @item = Item.find(params[:item_id])
       render :index, status: :unprocessable_entity
     end
   end

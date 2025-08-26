@@ -32,7 +32,15 @@
     <%# /支払額の表示 %>
 
     <%= form_with model: @purchase_form, url: item_orders_path(@item), local: true, class: 'transaction-form-wrap', id: 'charge-form' do |form| %>
-      <%= render 'shared/error_messages', model: @purchase_form %>
+      <% if @purchase_form.errors.any? %>
+        <div class="error-alert">
+          <ul>
+            <% @purchase_form.errors.full_messages.uniq.each do |message| %>
+              <li class='error-message'><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%# カード情報の入力 %>
       <div class='credit-card-form'>
         <h1 class='info-input-haedline'>
@@ -43,7 +51,7 @@
             <label class="form-text">カード番号</label>
             <span class="indispensable">必須</span>
           </div>
-          <div id="number-form" class="input-default"></div>
+          <input type="text" class="input-default" placeholder="カード番号" disabled>
         </div>
         <div class="form-group">
           <div class='form-text-wrap'>
@@ -51,7 +59,7 @@
             <span class="indispensable">必須</span>
           </div>
           <div class='input-expiration-date-wrap'>
-            <div id="expiry-form" class="input-default"></div>
+            <input type="text" class="input-default" placeholder="月/年" disabled>
           </div>
         </div>
         <div class="form-group">
@@ -59,7 +67,7 @@
             <label class="form-text">セキュリティコード</label>
             <span class="indispensable">必須</span>
           </div>
-          <div id="cvc-form" class="input-default"></div>
+          <input type="text" class="input-default" placeholder="CVC" disabled>
         </div>
       </div>
       <%# /カード情報の入力 %>
@@ -88,14 +96,14 @@
             <label class="form-text">市区町村</label>
             <span class="indispensable">必須</span>
           </div>
-          <%= form.text_field :city, class:"input-default", id:"city", placeholder:"例）横浜市緑区"%>
+          <%= form.text_field :city, class:"input-default", id:"city", placeholder:"例）横浜市緑区" %>
         </div>
         <div class="form-group">
           <div class='form-text-wrap'>
             <label class="form-text">番地</label>
             <span class="indispensable">必須</span>
           </div>
-          <%= form.text_field :street_address, class:"input-default", id:"addresses", placeholder:"例）青山1-1-1"%>
+          <%= form.text_field :street_address, class:"input-default", id:"addresses", placeholder:"例）青山1-1-1" %>
         </div>
         <div class="form-group">
           <div class='form-text-wrap'>
@@ -109,7 +117,7 @@
             <label class="form-text">電話番号</label>
             <span class="indispensable">必須</span>
           </div>
-          <%= form.text_field :phone_number, class:"input-default", id:"phone-number", placeholder:"例）09012345678",maxlength:"11"%>
+          <%= form.text_field :phone_number, class:"input-default", id:"phone-number", placeholder:"例）09012345678",maxlength:"11" %>
         </div>
       </div>
       <%# /配送先の入力 %>
@@ -124,78 +132,22 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOMContentLoaded event fired for orders page');
+  console.log('=== DOMContentLoaded event fired for orders page ===');
   
-  // PAY.JPライブラリが読み込まれているかチェック
-  if (typeof Payjp === 'undefined') {
-    console.log('Payjp is not defined');
+  // フォームの取得
+  const form = document.getElementById("charge-form");
+  if (!form) {
+    console.log('ERROR: Form not found!');
     return;
   }
   
-  // PAY.JPの公開鍵が設定されているかチェック
-  if (!window.PAYJP_PUBLIC_KEY) {
-    console.log('PAYJP_PUBLIC_KEY is not set');
-    return;
-  }
-
-  console.log('PAYJP_PUBLIC_KEY:', window.PAYJP_PUBLIC_KEY);
-
-  try {
-    // PAY.JPの正しい使用方法：Payjpコンストラクタを使用
-    const payjp = Payjp(window.PAYJP_PUBLIC_KEY);
-    console.log('Payjp instance created');
-    
-    const elements = payjp.elements();
-    
-    const numberElement = elements.create('cardNumber');
-    const expiryElement = elements.create('cardExpiry');
-    const cvcElement = elements.create('cardCvc');
-
-    // フォーム要素が存在するかチェック
-    const numberForm = document.getElementById("number-form");
-    const expiryForm = document.getElementById("expiry-form");
-    const cvcForm = document.getElementById("cvc-form");
-
-    console.log('Form elements found:', { numberForm, expiryForm, cvcForm });
-
-    if (numberForm && expiryForm && cvcForm) {
-      numberElement.mount('#number-form');
-      expiryElement.mount('#expiry-form');
-      cvcElement.mount('#cvc-form');
-      console.log('Card elements mounted successfully');
-    } else {
-      console.log('Required form elements not found');
-      return;
-    }
-
-    const form = document.getElementById("charge-form");
-    if (form) {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        console.log('Form submission intercepted');
-
-        payjp.createToken(numberElement).then(function (response) {
-          if (response.error) {
-            console.log('Token creation error:', response.error);
-          } else {
-            console.log('Token created successfully:', response.id);
-            const token = response.id;
-            const renderDom = document.getElementById("charge-form");
-            const tokenObj = `<input value=${token} name='purchase_form[token]' type="hidden"> `;
-            renderDom.insertAdjacentHTML("beforeend", tokenObj);
-            
-            numberElement.clear();
-            expiryElement.clear();
-            cvcElement.clear();
-            
-            document.getElementById("charge-form").submit();
-          }
-        });
-      });
-      console.log('Form submit event listener added');
-    }
-  } catch (error) {
-    console.log('Error in pay function:', error);
-  }
+  console.log('Form found:', form);
+  console.log('Form submit event listener added successfully');
+  
+  // フォーム送信時のログ出力のみ
+  form.addEventListener("submit", function(e) {
+    console.log('=== FORM SUBMIT EVENT TRIGGERED ===');
+    console.log('Form will be submitted to Rails for validation');
+  });
 });
 </script>
