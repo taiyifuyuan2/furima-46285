@@ -31,16 +31,20 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with model: @purchase_form, url: item_orders_path(@item), local: true, class: 'transaction-form-wrap', id: 'charge-form' do |form| %>
-      <% if @purchase_form.errors.any? %>
-        <div class="error-alert">
-          <ul>
-            <% @purchase_form.errors.full_messages.uniq.each do |message| %>
-              <li class='error-message'><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+          <%= form_with model: @purchase_form, url: item_orders_path(@item), local: true, class: 'transaction-form-wrap', id: 'charge-form' do |form| %>
+        <%# エラーメッセージの表示 %>
+        <% if @purchase_form.errors.any? %>
+          <div class="error-alert">
+            <ul>
+              <% @purchase_form.errors.full_messages.uniq.each do |message| %>
+                <li class='error-message'><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        
+        <%# 隠しフィールドでトークンを管理 %>
+        <%= form.hidden_field :token, id: 'token-field' %>
       <%# カード情報の入力 %>
       <div class='credit-card-form'>
         <h1 class='info-input-haedline'>
