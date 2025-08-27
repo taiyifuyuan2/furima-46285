@@ -15,4 +15,4 @@ class AddFieldsToUsers < ActiveRecord::Migration[7.1]
   end
 end
 
-
+# マイグレーションファイルの更新
