@@ -8,9 +8,8 @@ class AddFieldsToUsers < ActiveRecord::Migration[7.1]
     add_column :users, :last_name_kana, :string, null: false
     add_column :users, :first_name_kana, :string, null: false
     add_column :users, :birth_date, :date, null: false
-
-    add_index :users, :email, unique: true
   end
 end
 
-# マイグレーションファイルの更新２
+# マイグレーションファイルの更新
+# 最終更新完了
