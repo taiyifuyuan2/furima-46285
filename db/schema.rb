@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[7.1].define(version: 2025_08_25_025104) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  # enable_extension "plpgsql"  # PostgreSQL拡張機能を無効化
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
