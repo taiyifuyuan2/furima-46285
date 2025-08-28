@@ -1,0 +1,32 @@
+# EC2環境用のPostgreSQL設定
+# このファイルはEC2デプロイ時に使用します
+
+default: &default
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  adapter: postgresql
+  username: app_user
+  password: <%= ENV['DB_PASSWORD'] || 'your_password_here' %>
+  database: furima_46285_development
+  host: localhost
+
+test:
+  <<: *default
+  adapter: postgresql
+  username: app_user
+  password: <%= ENV['DB_PASSWORD'] || 'your_password_here' %>
+  database: furima_46285_test
+  host: localhost
+
+production:
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: app_user
+  password: <%= ENV['DB_PASSWORD'] || 'your_password_here' %>
+  database: furima_production
+  host: localhost
