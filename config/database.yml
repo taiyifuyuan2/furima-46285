@@ -15,7 +15,7 @@ default: &default
 
 development:
   <<: *default
-  adapter: postgresql
+  adapter: mysql2
   username: fukumototaichi
   password:
   host: localhost
@@ -23,7 +23,7 @@ development:
 
 test:
   <<: *default
-  adapter: postgresql
+  adapter: mysql2
   username: fukumototaichi
   password:
   host: localhost
@@ -50,9 +50,13 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
   adapter: mysql2
-  database: furima_46285_production
-  username: root
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  socket: /var/lib/mysql/mysql.sock   
+  encoding: utf8mb4
+  collation: utf8mb4_general_ci
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  database: furima_production
+  username: app_user
+  password: <%= ENV.fetch("DB_PASSWORD") %>
+  host: 127.0.0.1
+  socket: /var/lib/mysql/mysql.sock
+  #修正
