@@ -55,3 +55,4 @@ after_fork do |_server, _worker|
 end
 
 # Unicorn設定ファイルの更新完了
+# 強制コミット実行
