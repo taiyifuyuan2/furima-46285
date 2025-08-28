@@ -78,3 +78,9 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
 end
+
+group :production do
+  gem 'unicorn', '6.1.0'
+end #追加
+
+gem 'mysql2', '>= 0.5'

@@ -145,6 +145,7 @@ GEM
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
     json (2.13.2)
+    kgio (2.11.4)
     language_server-protocol (3.17.0.5)
     logger (1.7.0)
     loofah (2.24.1)
@@ -165,6 +166,7 @@ GEM
     minitest (5.25.5)
     msgpack (1.8.0)
     mutex_m (0.3.0)
+    mysql2 (0.5.6)
     net-imap (0.5.9)
       date
       net-protocol
@@ -242,6 +244,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
+    raindrops (0.20.1)
     rake (13.3.0)
     rdoc (6.14.2)
       erb
@@ -327,6 +330,9 @@ GEM
     unicode-display_width (3.1.5)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
+    unicorn (6.1.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -358,6 +364,7 @@ DEPENDENCIES
   faker
   importmap-rails
   jbuilder
+  mysql2 (>= 0.5)
   payjp
   pg
   puma (>= 5.0)
@@ -372,6 +379,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  unicorn (= 6.1.0)
   web-console
 
 RUBY VERSION
