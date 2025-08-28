@@ -10,10 +10,9 @@ gem 'rails', '~> 7.1.0'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
-# Use postgresql as the database for Active Record
-gem 'pg'
+gem 'mysql2', '>= 0.5'
 
-# Use the Puma web server [https://github.com/puma/puma]
+# Use the Puma web server [https://github.com/puma/puma]l
 gem 'puma', '>= 5.0'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -42,6 +41,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
+
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -81,6 +81,5 @@ end
 
 group :production do
   gem 'unicorn', '6.1.0'
-end #追加
+end
 
-gem 'mysql2', '>= 0.5'
