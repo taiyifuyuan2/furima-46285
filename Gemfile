@@ -10,11 +10,9 @@ gem 'rails', '~> 7.1.0'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', platforms: %i[mingw mswin x64_mingw jruby]
-
-# Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.5'
+# データベースアダプター（PostgreSQLとMySQL2の両方に対応）
+gem 'pg', '~> 1.5'        # Render（PostgreSQL）用
+gem 'mysql2', '>= 0.5'    # EC2（MySQL）用
 
 # Use the Puma web server [https://github.com/puma/puma]l
 gem 'puma', '>= 5.0'
