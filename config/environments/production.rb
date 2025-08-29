@@ -100,6 +100,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # Basic認証の環境変数設定（本番環境）
-  # 本番環境では環境変数から取得するため、ここでは設定しない
+  config.hosts << "127.0.0.1"
+
 end

@@ -51,9 +51,10 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
   adapter: mysql2
-  database: furima_46285_production
-  username: root
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  socket: /var/lib/mysql/mysql.sock
+  encoding: utf8mb4
+  database: furima_production
+  username: furima           
+  password: <%= ENV["DB_PASSWORD"] %>
+  host: 127.0.0.1
+  pool: 5

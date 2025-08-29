@@ -11,7 +11,7 @@ gem 'rails', '~> 7.1.0'
 gem 'sprockets-rails'
 
 # データベースアダプター（PostgreSQLとMySQL2の両方に対応）
-gem 'pg', '~> 1.5'        # Render（PostgreSQL）用
+#gem 'pg', '~> 1.5'        # Render（PostgreSQL）用
 gem 'mysql2', '>= 0.5'    # EC2（MySQL）用
 
 # Use the Puma web server [https://github.com/puma/puma]l
@@ -68,6 +68,10 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
+  gem 'capistrano', '~> 3.18'
+  gem 'capistrano-rails', '~> 1.6'
+  gem 'capistrano-rbenv', '~> 2.2'
+  gem 'capistrano-bundler', '~> 2.1'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
